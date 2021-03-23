@@ -2,3 +2,4 @@ numpy
 sympy
 matplotlib
 scipy
+anmi
