@@ -10,7 +10,7 @@ setuptools.setup(
     long_description="",
     long_description_content_type="text/markdown",
     url="https://github.com/alexmascension/ANMI",
-    project_urls={"Bug Tracker": "https://github.com/alexmascension/ANMI/issues",},
+    project_urls={"Bug Tracker": "https://github.com/alexmascension/ANMI/issues"},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
