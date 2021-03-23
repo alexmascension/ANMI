@@ -42,11 +42,13 @@ def sucesion_krylov(A, x):
     """
     m_krylov = matriz_krylov(A, x)
 
-    a = (m_krylov[:, : A.shape[0]] ** (-1)) * m_krylov[:, -1]
+    a = (m_krylov[:, : A.shape[0]] ** (-1)) * (
+        ((-1) ** (A.shape[0] + 1)) * m_krylov[:, -1]
+    )
     a = simplify(a)
 
     lambda_ = symbols("lambda")
-    poli_krylov = poly(-(lambda_ ** 3) + a[0])
+    poli_krylov = poly(((-1) ** A.shape[0]) * (lambda_ ** A.shape[0]) + a[0])
 
     for i in range(1, A.shape[0]):
         poli_krylov += poly(a[i] * (lambda_ ** i))
