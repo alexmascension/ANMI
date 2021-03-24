@@ -1,3 +1,7 @@
+from sympy.matrices import Matrix as mat
+from sympy import Poly
+
+
 def metodo_ruffini(poli, x0):
     """Método de Ruffini. Aplica el método para la evaluación de un polinomio.
 

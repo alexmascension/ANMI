@@ -1,4 +1,4 @@
-from sympy import sqrt, simplify
+from sympy import sqrt, simplify, symbols, integrate, solve
 import numpy as np
 
 
@@ -71,6 +71,9 @@ def norma_2(A, verbose=False):
     return norma_2
 
 
+x = symbols('x')
+
+
 def norma_p_func(expr, var=x, p=2, a=0, b=1):
     """Calcula la norma p de una función
 
@@ -101,7 +104,7 @@ def norma_p_func(expr, var=x, p=2, a=0, b=1):
     return integral
 
 
-def norma_inf_func(expr, var=x, a=None, b=None):
+def norma_inf_func(expr, var=x, a=None, b=None, return_sols=False):
     """Calcula la norma infinita de una función
 
     Args:
@@ -109,18 +112,19 @@ def norma_inf_func(expr, var=x, a=None, b=None):
         var (variable, optional): variable de la funcion. Defaults to x.
         a (int, optional): limite inferior. Defaults to 0.
         b (int, optional): limite superior. Defaults to 1.
+        return_sols (bool, optional): si True, devuelve las soluciones y la localizacion
 
     Returns:
         expr: expresión de la norma
     """
     fprime = expr.diff(var)
 
-    solutions = [(xx, abs(expr.subs(var, xx))) for xx in sp.solve(fprime, var)]
+    solutions = [(xx, abs(expr.subs(var, xx))) for xx in solve(fprime, var)]
     if a is None or b is None:
         pass
     else:
-        solutions = [i for i in all_solutions if (interval[0] <= a) & (interval[1] >= b)]
+        solutions = [i for i in solutions if (a <= i[0]) & (b >= i[0])]
 
-    max_val = max([i[1] for i in interval_solutions])
+    max_val = max([i[1] for i in solutions])
 
-    return max_val
+    return max_val, solutions
