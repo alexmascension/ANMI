@@ -1,4 +1,4 @@
-from sympy import sqrt, simplify, symbols, integrate, solve, Matrix, eye, cbrt, inv
+from sympy import sqrt, simplify, symbols, integrate, solve, Matrix, eye, cbrt
 import numpy as np
 
 
