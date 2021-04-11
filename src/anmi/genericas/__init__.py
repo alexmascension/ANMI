@@ -1,4 +1,4 @@
-from sympy import sqrt, simplify, symbols, integrate, solve
+from sympy import sqrt, simplify, symbols, integrate, solve, Matrix, eye, cbrt, inv
 import numpy as np
 
 
@@ -128,3 +128,32 @@ def norma_inf_func(expr, var=x, a=None, b=None, return_sols=False):
     max_val = max([i[1] for i in solutions])
 
     return max_val, solutions
+
+
+def matriz_inversa(M, thresh=0.1):
+    """
+    Calcula la inversa de manera natural con sympy. Si no se satisface que M**(-1) * M = I (mediante la norma de M**(-1) * M - I), entonces calculamos la inversa con numpy.
+    Aviso! Que la inversa nueva tenga menor norma que la original, no significa que sea lo suficientemente aceptable como para poder efectuar cálculos con ella.
+
+    Args:
+        M (Matriz): Matriz para calcular la inversa
+        thresh (float, optional): Valor límite de la norma de M.inv * M - I. Defaults to 0.1.
+
+    Returns:
+        Matriz: Matriz inversa
+    """
+
+    M_inv = M.inv()
+
+    norma = (simplify(M_inv * M) - eye(M.shape[0])).norm()
+
+    if norma > thresh:
+        print('AVISO! La inversa es inestable.')
+        M_inv_np = Matrix(inv(np.array(M, dtype=float)))
+        norma_numpy = (simplify(M_inv_np * M) - eye(M.shape[0])).norm()
+
+        if norma_numpy < norma:
+            print('Devolvemos la inversa usando numpy.')
+            return M_inv_np
+
+    return M_inv
