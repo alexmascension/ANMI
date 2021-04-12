@@ -1,5 +1,6 @@
 from sympy import sqrt, simplify, symbols, integrate, solve, Matrix, eye, cbrt
 import numpy as np
+from numpy.linalg import inv
 
 
 def norma(x):
