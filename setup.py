@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="anmi",  # Replace with your own username
-    version="0.0.3",
+    version="0.0.5",
     author="alexmascension",
     author_email="alexmascension@gmail.com",
     description="Archivos para correr ANMI",
