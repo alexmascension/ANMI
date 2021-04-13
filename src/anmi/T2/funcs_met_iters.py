@@ -2,7 +2,7 @@ from sympy import simplify, zeros
 from sympy import Matrix as mat
 import numpy as np
 
-from ..genericas import print_verbose
+from ..genericas import print_verbose, matriz_inversa
 
 
 def criterio_radio_espectral(H, verbose=True):
@@ -86,7 +86,7 @@ def criterio_m_matriz(A, verbose):
         "||Criterio M matriz||\n Si la A es M-matriz entonces las descomposiciones de Jacobi y Gauss-Seidel son convergentes.\nA^-1 >= 0\naij < 0 para todo i =/= j",
         verbose,
     )
-    A_inv = A ** -1
+    A_inv = matriz_inversa(A)
 
     try:
         np.array(A, dtype=float)
@@ -159,7 +159,7 @@ def metodo_iterativo(
     N = simplify(M - A)
 
     # Aplicamos criterios!
-    criterio_radio_espectral(M ** (-1) * N, verbose)
+    criterio_radio_espectral(matriz_inversa(M) * N, verbose)
     criterio_diagonal_dominante(A, verbose)
     criterio_simetrica_definida_positiva(A, verbose)
     criterio_SOR(verbose)
@@ -167,7 +167,7 @@ def metodo_iterativo(
 
     diff = []
     for iter in range(n_iter):  # Aplica el método
-        x0 = (M ** (-1)) * (N * x0 + b)
+        x0 = (matriz_inversa(M)) * (N * x0 + b)
         diff.append(np.sum(np.abs(A * x0 - b)))
 
     return {"x": x0, "diff": diff}

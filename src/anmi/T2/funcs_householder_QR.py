@@ -2,7 +2,7 @@ import numpy as np
 from sympy import zeros, eye, simplify, sqrt
 from sympy import Matrix as mat
 
-from ..genericas import print_verbose, norma
+from ..genericas import print_verbose, norma, matriz_inversa
 from .funcs_gram_schmidt import gram_schmidt
 
 
@@ -77,7 +77,7 @@ def factorizacion_QR(m, verbose=True, metodo="gram_schmidt"):
         for col in range(m.shape[0]):
             D[col, col] = sqrt((P[:, col].T * P[:, col])[0])
 
-        Q = simplify(P * (D ** (-1)))
+        Q = simplify(P * (matriz_inversa(D)))
         R = simplify(D * (eye(m.shape[0]) + C))
 
         print_verbose(

@@ -1,5 +1,5 @@
 import numpy as np
-from ..genericas import print_verbose
+from ..genericas import print_verbose, matriz_inversa
 from sympy import zeros, eye, simplify, sqrt
 
 
@@ -226,7 +226,7 @@ def descomposicion_LDU(m, permutar_max=True, verbose=False):
     for i in range(U.shape[0]):
         D[i, i] = U[i, i]
 
-    U = D.inv() * U
+    U = matriz_inversa(D) * U
 
     print_verbose(
         [
