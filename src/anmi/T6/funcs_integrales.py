@@ -288,7 +288,8 @@ def error_trapecio_m(f, var=symbols('x'), I=[0, 1], m=2):
     for _ in range(2):
         diff_f = diff_f.diff(var)
 
-    max_diff_f = nsimplify(maximum(diff_f, var, Interval(I[0], I[1])), rational=True)
+    a, b = I  # Me da fallo random si no hago esto!
+    max_diff_f = nsimplify(maximum(diff_f, var, Interval(a, b)), rational=True)
 
     factor_division = (I[1] - I[0]) ** 3 / (12 * (m ** 2))
 
@@ -313,7 +314,8 @@ def error_simpson_m(f, var=symbols('x'), I=[0, 1], m=2):
     for _ in range(4):
         diff_f = diff_f.diff(var)
 
-    max_diff_f = nsimplify(maximum(diff_f, var, Interval(I[0], I[1])), rational=True)
+    a, b = I  # Me da fallo random si no hago esto!
+    max_diff_f = nsimplify(maximum(diff_f, var, Interval(a, b)), rational=True)
 
     factor_division = (I[1] - I[0]) ** 5 / (90 * (m ** 4) * (2 ** 5))
 
