@@ -1,4 +1,4 @@
-from sympy import simplify, integrate, zeros, S, Matrix, symbols
+from sympy import simplify, integrate, zeros, S, Matrix, symbols, Integral
 from ..genericas import matriz_inversa
 
 
