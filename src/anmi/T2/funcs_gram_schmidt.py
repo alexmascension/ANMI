@@ -1,5 +1,5 @@
 from ..genericas import print_verbose
-from sympy import zeros, simplify
+from sympy import zeros, simplify, sqrt
 
 
 def suma_columnas(lista):
@@ -36,13 +36,13 @@ def gram_schmidt(m, verbose=False):
 
     p_norm = zeros(m.shape[0], m.shape[1])
     for col in range(p.shape[1]):
-        p_norm[:, col] = p[:, col] / (p[:, col].T * p[:, col])[0]
+        p_norm[:, col] = p[:, col] / (p[:, col].T * p[:, col])[0] ** 0.5
 
     print_verbose(f"La matriz ortonormal es \n {p_norm}", verbose)
 
     c = zeros(m.shape[0], m.shape[1])
     for col in range(1, m.shape[1]):
         for row in range(0, col):
-            c[row, col] = (m[:, col].T * p[:, row])[0] / (p[:, row].T * p[:, row])[0]
+            c[row, col] = (m[:, col].T * p[:, row])[0] / sqrt((p[:, row].T * p[:, row])[0])
 
     return {"P": simplify(p), "Pn": simplify(p_norm), "c": simplify(c)}
